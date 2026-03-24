@@ -1,2 +1,6 @@
 export AWS_DEFAULT_PROFILE="your-aws-profile-name"
 export TF_VAR_cloudflare_api_token="your-cloudflare-api-token"
+# Optional overrides for reading infra-public-edge remote state.
+# export TF_VAR_infra_public_edge_state_bucket="levizitting-infra-tf-state"
+# export TF_VAR_infra_public_edge_state_key="public-vps/terraform.tfstate"
+# export TF_VAR_infra_public_edge_state_region="us-east-2"

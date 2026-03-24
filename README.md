@@ -7,6 +7,11 @@ OpenTofu configuration for SGF Devs DNS management in Cloudflare.
 - OpenTofu in `src/tf/` manages DNS zones and records.
 - v1 targets the `sgf.dev` zone and core service records.
 
+Core records in v1:
+
+- `x86-public-vps.sgf.dev` -> CNAME to `infra-public-edge` output `vps_hostname`
+- `hello-nginx.sgf.dev` -> CNAME to `x86-public-vps.sgf.dev`
+
 ## Usage
 
 ### Prerequisites
@@ -39,3 +44,12 @@ make tf-lint-fix
 - `TF_VAR_cloudflare_api_token`
 - `AWS_ROLE_ARN`
 - `OUTPUT_ENCRYPTION_KEY`
+
+## Migration Notes
+
+If records already exist in Cloudflare, import them before first apply:
+
+```bash
+tofu -chdir=src/tf import 'cloudflare_dns_record.core["x86-public-vps"]' <zone_id>/<record_id>
+tofu -chdir=src/tf import 'cloudflare_dns_record.core["hello-nginx"]' <zone_id>/<record_id>
+```
