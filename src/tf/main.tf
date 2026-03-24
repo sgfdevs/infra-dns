@@ -11,15 +11,9 @@ locals {
   x86_public_vps_target = trimsuffix(data.terraform_remote_state.infra_public_edge.outputs.vps_hostname, ".")
 
   records = {
-    "x86-public-vps" = {
-      type    = "CNAME"
-      content = local.x86_public_vps_target
-      proxied = false
-      ttl     = 300
-    }
     "hello-nginx" = {
       type    = "CNAME"
-      content = "x86-public-vps.${var.cloudflare_zone_name}"
+      content = local.x86_public_vps_target
       proxied = false
       ttl     = 300
     }
