@@ -4,7 +4,7 @@ output "cloudflare_zone_id" {
 }
 
 output "x86_public_vps_target" {
-  description = "Target hostname sourced from infra-public-edge vps_hostname output"
+  description = "Target hostname for hello-nginx CNAME"
   value       = local.x86_public_vps_target
 }
 

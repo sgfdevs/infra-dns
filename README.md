@@ -9,14 +9,13 @@ OpenTofu configuration for SGF Devs DNS management in Cloudflare.
 
 Core records in v1:
 
-- `hello-nginx.sgf.dev` -> CNAME to `infra-public-edge` output `vps_hostname`
+- `hello-nginx.sgf.dev` -> CNAME to `x86-vps-node-01.levizitting.com`
 
 ## Usage
 
 ### Prerequisites
 
 - [OpenTofu](https://opentofu.org/) >= 1.11 (version pinned in `src/tf/.tofu-version`)
-- AWS credentials configured locally (for remote state backend)
 - Cloudflare API token with DNS edit permissions
 
 ### Local Operations

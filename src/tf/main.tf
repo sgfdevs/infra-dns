@@ -1,14 +1,5 @@
-data "terraform_remote_state" "infra_public_edge" {
-  backend = "s3"
-  config = {
-    bucket = var.infra_public_edge_state_bucket
-    key    = var.infra_public_edge_state_key
-    region = var.infra_public_edge_state_region
-  }
-}
-
 locals {
-  x86_public_vps_target = trimsuffix(data.terraform_remote_state.infra_public_edge.outputs.vps_hostname, ".")
+  x86_public_vps_target = "x86-vps-node-01.levizitting.com"
 
   records = {
     "hello-nginx" = {
