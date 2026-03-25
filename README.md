@@ -1,55 +1,20 @@
-# SGF Devs DNS Infrastructure
+# infra-dns
 
-OpenTofu configuration for SGF Devs DNS management in Cloudflare.
+Manages Cloudflare DNS records for `sgf.dev` as code.
 
 ## Scope
+- Owns: Cloudflare DNS records declared in this repo for the `sgf.dev` zone.
+- Owns: Terraform/OpenTofu state for DNS changes in this stack.
 
-- OpenTofu in `src/tf/` manages DNS zones and records.
-- v1 targets the `sgf.dev` zone and a narrow, explicit record set.
+## Structure
+- `src/tf/`: OpenTofu DNS resources, provider config, backend config, and outputs.
+- `.github/workflows/`: Plan/validate/apply automation for DNS changes.
 
-Core records in v1:
-
-- `hello-nginx.sgf.dev` -> CNAME to `x86-vps-node-01.levizitting.com`
-
-## Usage
-
-### Prerequisites
-
-- [OpenTofu](https://opentofu.org/) >= 1.11 (version pinned in `src/tf/.tofu-version`)
-- Cloudflare API token with DNS edit permissions
-
-### Local Operations
-
+## Run
 ```bash
 make help
 make tf-init
 make tf-plan
-make tf-show ARGS=tfplan
-make tf-output
 make tf-apply
-make tf-validate
-make tf-format
-make tf-lint-fix
-```
-
-## CI
-
-- Pull requests run Terraform validate and plan.
-- Pushes to `main` run Terraform plan+apply.
-
-## Required GitHub Secrets
-
-- `TF_VAR_cloudflare_api_token`
-- `AWS_ROLE_ARN`
-- `OUTPUT_ENCRYPTION_KEY`
-
-## Migration Notes
-
-This stack only manages records declared in `src/tf/main.tf`; it does not attempt
-to import or reconcile every record in the zone.
-
-If `hello-nginx.sgf.dev` already exists in Cloudflare, import it before first apply:
-
-```bash
-tofu -chdir=src/tf import 'cloudflare_dns_record.core["hello-nginx"]' <zone_id>/<record_id>
+make tf-output
 ```
