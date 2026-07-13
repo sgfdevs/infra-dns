@@ -11,7 +11,7 @@ The following public platform endpoints are DNS-only CNAMEs to the shared edge a
 `x86-vps-node-01.levizitting.com`:
 
 - `argocd.sgf.dev`
-- `sso.sgf.dev`
+- `dex.sgf.dev`
 - `auth.sgf.dev`
 - `grafana.sgf.dev`
 - `secrets.sgf.dev`
