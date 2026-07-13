@@ -4,7 +4,7 @@ output "cloudflare_zone_id" {
 }
 
 output "x86_public_vps_target" {
-  description = "Target hostname for hello-nginx CNAME"
+  description = "Shared edge target hostname for public platform CNAMEs"
   value       = local.x86_public_vps_target
 }
 
