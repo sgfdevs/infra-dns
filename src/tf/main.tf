@@ -1,5 +1,6 @@
 locals {
   x86_public_vps_target = "x86-vps-node-01.levizitting.com"
+  dns_record_comment    = "managedBy=tf,repo=sgfdevs/infra-dns"
 
   # Public SGF platform endpoints managed by this stack and routed to the shared edge.
   records = {
