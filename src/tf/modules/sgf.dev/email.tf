@@ -58,7 +58,7 @@ resource "cloudflare_dns_record" "sgf_dev_dmarc" {
   zone_id = var.zone_id
   name    = "_dmarc"
   type    = "TXT"
-  content = "v=DMARC1; p=none; pct=100; rua=mailto:re+w7uekgngs7n@dmarc.postmarkapp.com; sp=none; aspf=r;"
+  content = "v=DMARC1; p=none; pct=100; rua=mailto:re+w7uekgngs7n@dmarc.postmarkapp.com; sp=none; adkim=s; aspf=r;"
   comment = var.comment
   proxied = false
   ttl     = 1
@@ -183,7 +183,7 @@ resource "cloudflare_dns_record" "email_sgf_dev_dmarc" {
   zone_id = var.zone_id
   name    = "_dmarc.email"
   type    = "TXT"
-  content = "v=DMARC1; p=none; pct=100; rua=mailto:re+myq6uaa4s9o@dmarc.postmarkapp.com; sp=none; aspf=r;"
+  content = "v=DMARC1; p=none; pct=100; rua=mailto:re+myq6uaa4s9o@dmarc.postmarkapp.com; sp=none; adkim=s; aspf=r;"
   comment = var.comment
   proxied = false
   ttl     = 1
