@@ -1,6 +1,15 @@
 locals {
   email_sgf_dev_dkim_public_key = "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEA6za72OrWxhqepHCK5+RPWFpo0zs3A2HeyHsDwmiy7pQDdWvzHJAysYEwYr25IdA8UmMcg2ArOQgC+KYkyLlvUf7wKf7s0DIIP3rzqVxD/rt8qUnYol/lfWGTwUlEhJReGHp6y8i0EP9CtLWAWZaTWg1Jm3/OzO5NGrqYP9EQcg4kbgAbm/KraQ6kKEiZgBt7Qxqrev07fL0YuNVRn4qxkOlpaJmJHaVoOreB+xksvb5WTFi/3E3439TOHHl8Cdw4MLz9AY1bSkZd1kYRp2erQsqHsLmVJGqinmFSobnki8a8GFYpNxF0rZ6kxrB8pYrnXGL4mMbVbtWm6arkbmTeUQIDAQAB"
   sgf_dev_mail_dkim_public_key  = "MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQDeMVIzrCa3T14JsNY0IRv5/2V1/v2itlviLQBwXsa7shBD6TrBkswsFUToPyMRWC9tbR/5ey0nRBH0ZVxp+lsmTxid2Y2z+FApQ6ra2VsXfbJP3HE6wAO0YTVEJt1TmeczhEd2Jiz/fcabIISgXEdSpTYJhb0ct0VJRxcg4c8c7wIDAQAB"
+  ses_email_identity            = "sgf.dev"
+}
+
+data "aws_sesv2_email_identity" "sgf_dev" {
+  email_identity = local.ses_email_identity
+}
+
+data "aws_sesv2_email_identity_mail_from_attributes" "sgf_dev" {
+  email_identity = data.aws_sesv2_email_identity.sgf_dev.email_identity
 }
 
 resource "cloudflare_dns_record" "sgf_dev_mx" {
@@ -65,27 +74,34 @@ resource "cloudflare_dns_record" "sgf_dev_bimi" {
   ttl     = 1
 }
 
-resource "cloudflare_dns_record" "sgf_dev_ses_verification" {
+resource "cloudflare_dns_record" "sgf_dev_ses_dkim" {
+  for_each = toset(data.aws_sesv2_email_identity.sgf_dev.dkim_signing_attributes[0].tokens)
+
   zone_id = var.zone_id
-  name    = "_amazonses"
-  type    = "TXT"
-  content = "8bGAoexnHvNluOfiXVVpN1ov5SuDB7+hllR0RTVLHus="
+  name    = "${each.value}._domainkey"
+  type    = "CNAME"
+  content = "${each.value}.dkim.amazonses.com"
   comment = var.comment
   proxied = false
   ttl     = 1
 }
 
-resource "cloudflare_dns_record" "sgf_dev_ses_dkim" {
-  for_each = {
-    "tgspmcpf225ezxnpb3ulbuizyqyotuji" = "tgspmcpf225ezxnpb3ulbuizyqyotuji.dkim.amazonses.com"
-    "xxjzrcixpkgijyd4zvaovotpb47eaupc" = "xxjzrcixpkgijyd4zvaovotpb47eaupc.dkim.amazonses.com"
-    "aeh65o4lv7qonzgcxjds73hbg6krcrao" = "aeh65o4lv7qonzgcxjds73hbg6krcrao.dkim.amazonses.com"
-  }
+resource "cloudflare_dns_record" "sgf_dev_ses_mail_from_mx" {
+  zone_id  = var.zone_id
+  name     = data.aws_sesv2_email_identity_mail_from_attributes.sgf_dev.mail_from_domain
+  type     = "MX"
+  content  = "feedback-smtp.${var.aws_region}.amazonses.com"
+  priority = 10
+  comment  = var.comment
+  proxied  = false
+  ttl      = 1
+}
 
+resource "cloudflare_dns_record" "sgf_dev_ses_mail_from_spf" {
   zone_id = var.zone_id
-  name    = "${each.key}._domainkey"
-  type    = "CNAME"
-  content = each.value
+  name    = data.aws_sesv2_email_identity_mail_from_attributes.sgf_dev.mail_from_domain
+  type    = "TXT"
+  content = "v=spf1 include:amazonses.com -all"
   comment = var.comment
   proxied = false
   ttl     = 1

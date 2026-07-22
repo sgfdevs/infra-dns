@@ -8,6 +8,7 @@ module "sgf_dev" {
 
   zone_id               = data.cloudflare_zone.sgf_dev.id
   comment               = local.dns_record_comment
+  aws_region            = var.aws_region
   x86_public_vps_target = local.x86_public_vps_target
 }
 
@@ -35,8 +36,9 @@ module "helpsgf_com" {
 module "methodconf_com" {
   source = "./modules/methodconf.com"
 
-  zone_id = data.cloudflare_zone.methodconf_com.id
-  comment = local.dns_record_comment
+  zone_id    = data.cloudflare_zone.methodconf_com.id
+  comment    = local.dns_record_comment
+  aws_region = var.aws_region
 }
 
 module "sgfwebdevs_com" {

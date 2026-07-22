@@ -8,6 +8,11 @@ variable "comment" {
   type        = string
 }
 
+variable "aws_region" {
+  description = "AWS region containing the SES identity"
+  type        = string
+}
+
 variable "x86_public_vps_target" {
   description = "Shared edge target hostname for public platform CNAMEs"
   type        = string
