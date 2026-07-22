@@ -1,14 +1,14 @@
 # infra-dns
 
-Manages Cloudflare DNS records for `sgf.dev` as code.
+Manages SGF community Cloudflare DNS records as code.
 
 ## Scope
-- Owns: Cloudflare DNS records declared in this repo for the `sgf.dev` zone.
+- Owns: Cloudflare DNS records declared in this repo for SGF community zones.
 - Owns: Terraform/OpenTofu state for DNS changes in this stack.
 
 ## Structure
 - `src/tf/`: Root OpenTofu stack, provider configuration, and zone lookups.
-- `src/tf/modules/sgf.dev/`: All DNS records for the `sgf.dev` zone.
+- `src/tf/modules/<domain>/`: DNS records grouped by Cloudflare zone.
 - `.github/workflows/`: Plan/validate/apply automation for DNS changes.
 
 ## Run
