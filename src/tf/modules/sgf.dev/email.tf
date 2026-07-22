@@ -4,22 +4,22 @@ locals {
 }
 
 resource "cloudflare_dns_record" "sgf_dev_mx" {
-  zone_id  = data.cloudflare_zone.sgf_dev.id
+  zone_id  = var.zone_id
   name     = "@"
   type     = "MX"
   content  = "sgf-dev.mail.protection.outlook.com"
   priority = 0
-  comment  = local.dns_record_comment
+  comment  = var.comment
   proxied  = false
   ttl      = 900
 }
 
 resource "cloudflare_dns_record" "sgf_dev_spf" {
-  zone_id = data.cloudflare_zone.sgf_dev.id
+  zone_id = var.zone_id
   name    = "@"
   type    = "TXT"
   content = "v=spf1 include:spf.protection.outlook.com -all"
-  comment = local.dns_record_comment
+  comment = var.comment
   proxied = false
   ttl     = 900
 }
@@ -36,41 +36,41 @@ resource "cloudflare_dns_record" "sgf_dev_microsoft_dkim" {
     }
   }
 
-  zone_id = data.cloudflare_zone.sgf_dev.id
+  zone_id = var.zone_id
   name    = each.value.name
   type    = "CNAME"
   content = each.value.content
-  comment = local.dns_record_comment
+  comment = var.comment
   proxied = false
   ttl     = 1
 }
 
 resource "cloudflare_dns_record" "sgf_dev_dmarc" {
-  zone_id = data.cloudflare_zone.sgf_dev.id
+  zone_id = var.zone_id
   name    = "_dmarc"
   type    = "TXT"
   content = "v=DMARC1; p=none; pct=100; rua=mailto:re+w7uekgngs7n@dmarc.postmarkapp.com; sp=none; aspf=r;"
-  comment = local.dns_record_comment
+  comment = var.comment
   proxied = false
   ttl     = 1
 }
 
 resource "cloudflare_dns_record" "sgf_dev_bimi" {
-  zone_id = data.cloudflare_zone.sgf_dev.id
+  zone_id = var.zone_id
   name    = "default._bimi"
   type    = "TXT"
   content = "\"v=BIMI1; l=https://www.sgf.dev/bimi.svg; a=; avp=brand;\""
-  comment = local.dns_record_comment
+  comment = var.comment
   proxied = false
   ttl     = 1
 }
 
 resource "cloudflare_dns_record" "sgf_dev_ses_verification" {
-  zone_id = data.cloudflare_zone.sgf_dev.id
+  zone_id = var.zone_id
   name    = "_amazonses"
   type    = "TXT"
   content = "8bGAoexnHvNluOfiXVVpN1ov5SuDB7+hllR0RTVLHus="
-  comment = local.dns_record_comment
+  comment = var.comment
   proxied = false
   ttl     = 1
 }
@@ -82,41 +82,41 @@ resource "cloudflare_dns_record" "sgf_dev_ses_dkim" {
     "aeh65o4lv7qonzgcxjds73hbg6krcrao" = "aeh65o4lv7qonzgcxjds73hbg6krcrao.dkim.amazonses.com"
   }
 
-  zone_id = data.cloudflare_zone.sgf_dev.id
+  zone_id = var.zone_id
   name    = "${each.key}._domainkey"
   type    = "CNAME"
   content = each.value
-  comment = local.dns_record_comment
+  comment = var.comment
   proxied = false
   ttl     = 1
 }
 
 resource "cloudflare_dns_record" "sgf_dev_smtp2go_dkim" {
-  zone_id = data.cloudflare_zone.sgf_dev.id
+  zone_id = var.zone_id
   name    = "s470710._domainkey"
   type    = "CNAME"
   content = "dkim.smtp2go.net"
-  comment = local.dns_record_comment
+  comment = var.comment
   proxied = false
   ttl     = 1
 }
 
 resource "cloudflare_dns_record" "sgf_dev_brevo_verification" {
-  zone_id = data.cloudflare_zone.sgf_dev.id
+  zone_id = var.zone_id
   name    = "@"
   type    = "TXT"
   content = "brevo-code:45c4b9a09b510161bd655fb1198fb245"
-  comment = local.dns_record_comment
+  comment = var.comment
   proxied = false
   ttl     = 1
 }
 
 resource "cloudflare_dns_record" "sgf_dev_mail_dkim" {
-  zone_id = data.cloudflare_zone.sgf_dev.id
+  zone_id = var.zone_id
   name    = "mail._domainkey"
   type    = "TXT"
   content = "k=rsa;p=${local.sgf_dev_mail_dkim_public_key}"
-  comment = local.dns_record_comment
+  comment = var.comment
   proxied = false
   ttl     = 1
 }
@@ -133,73 +133,73 @@ resource "cloudflare_dns_record" "email_sgf_dev_mx" {
     }
   }
 
-  zone_id  = data.cloudflare_zone.sgf_dev.id
+  zone_id  = var.zone_id
   name     = "email"
   type     = "MX"
   content  = each.value.content
   priority = each.value.priority
-  comment  = local.dns_record_comment
+  comment  = var.comment
   proxied  = false
   ttl      = 1
 }
 
 resource "cloudflare_dns_record" "email_sgf_dev_spf" {
-  zone_id = data.cloudflare_zone.sgf_dev.id
+  zone_id = var.zone_id
   name    = "email"
   type    = "TXT"
   content = "v=spf1 include:mxlogin.com -all"
-  comment = local.dns_record_comment
+  comment = var.comment
   proxied = false
   ttl     = 1
 }
 
 resource "cloudflare_dns_record" "email_sgf_dev_dkim" {
-  zone_id = data.cloudflare_zone.sgf_dev.id
+  zone_id = var.zone_id
   name    = "x._domainkey.email"
   type    = "TXT"
   content = "v=DKIM1; k=rsa; p=${local.email_sgf_dev_dkim_public_key}"
-  comment = local.dns_record_comment
+  comment = var.comment
   proxied = false
   ttl     = 1
 }
 
 resource "cloudflare_dns_record" "email_sgf_dev_dmarc" {
-  zone_id = data.cloudflare_zone.sgf_dev.id
+  zone_id = var.zone_id
   name    = "_dmarc.email"
   type    = "TXT"
   content = "v=DMARC1; p=none; pct=100; rua=mailto:re+myq6uaa4s9o@dmarc.postmarkapp.com; sp=none; aspf=r;"
-  comment = local.dns_record_comment
+  comment = var.comment
   proxied = false
   ttl     = 1
 }
 
 resource "cloudflare_dns_record" "email_sgf_dev_bimi" {
-  zone_id = data.cloudflare_zone.sgf_dev.id
+  zone_id = var.zone_id
   name    = "default._bimi.email"
   type    = "TXT"
   content = "\"v=BIMI1; l=https://www.sgf.dev/bimi.svg; a=; avp=brand;\""
-  comment = local.dns_record_comment
+  comment = var.comment
   proxied = false
   ttl     = 1
 }
 
 resource "cloudflare_dns_record" "api_sgf_dev_mx" {
-  zone_id  = data.cloudflare_zone.sgf_dev.id
+  zone_id  = var.zone_id
   name     = "api"
   type     = "MX"
   content  = "mx5.dnihost.net"
   priority = 10
-  comment  = local.dns_record_comment
+  comment  = var.comment
   proxied  = false
   ttl      = 1
 }
 
 resource "cloudflare_dns_record" "api_sgf_dev_ses_verification" {
-  zone_id = data.cloudflare_zone.sgf_dev.id
+  zone_id = var.zone_id
   name    = "_amazonses.api"
   type    = "TXT"
   content = "ad1eLGblxZZAo4S+fV7ET4YospzsupjuHHAzy4en03M="
-  comment = local.dns_record_comment
+  comment = var.comment
   proxied = false
   ttl     = 1
 }
@@ -211,32 +211,32 @@ resource "cloudflare_dns_record" "api_sgf_dev_ses_dkim" {
     "g7vdgtjbddhiqf73iaobvawexotf4xaf" = "g7vdgtjbddhiqf73iaobvawexotf4xaf.dkim.amazonses.com"
   }
 
-  zone_id = data.cloudflare_zone.sgf_dev.id
+  zone_id = var.zone_id
   name    = "${each.key}._domainkey.api"
   type    = "CNAME"
   content = each.value
-  comment = local.dns_record_comment
+  comment = var.comment
   proxied = false
   ttl     = 1
 }
 
 resource "cloudflare_dns_record" "mail_out_aws_h4g_sgf_dev_mx" {
-  zone_id  = data.cloudflare_zone.sgf_dev.id
+  zone_id  = var.zone_id
   name     = "mail-out-aws-h4g"
   type     = "MX"
   content  = "feedback-smtp.us-east-1.amazonses.com"
   priority = 10
-  comment  = local.dns_record_comment
+  comment  = var.comment
   proxied  = false
   ttl      = 1
 }
 
 resource "cloudflare_dns_record" "mail_out_aws_h4g_sgf_dev_spf" {
-  zone_id = data.cloudflare_zone.sgf_dev.id
+  zone_id = var.zone_id
   name    = "mail-out-aws-h4g"
   type    = "TXT"
   content = "v=spf1 include:amazonses.com ~all"
-  comment = local.dns_record_comment
+  comment = var.comment
   proxied = false
   ttl     = 1
 }
