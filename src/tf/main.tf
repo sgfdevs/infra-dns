@@ -22,8 +22,9 @@ module "devfestsgf_com" {
 module "hack4goodsgf_com" {
   source = "./modules/hack4goodsgf.com"
 
-  zone_id = data.cloudflare_zone.hack4goodsgf_com.id
-  comment = local.dns_record_comment
+  zone_id               = data.cloudflare_zone.hack4goodsgf_com.id
+  comment               = local.dns_record_comment
+  x86_public_vps_target = local.x86_public_vps_target
 }
 
 module "helpsgf_com" {
