@@ -26,8 +26,8 @@ locals {
       name    = "staging"
       type    = "CNAME"
       content = var.x86_public_vps_target
-      proxied = true
-      ttl     = 1
+      proxied = false
+      ttl     = 300
     }
     www = {
       name    = "www"
