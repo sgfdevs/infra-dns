@@ -278,6 +278,13 @@ locals {
       proxied = false
       ttl     = 1
     }
+    workflows = {
+      name    = "workflows"
+      type    = "CNAME"
+      content = var.x86_public_vps_target
+      proxied = false
+      ttl     = 300
+    }
     www = {
       name    = "www"
       type    = "CNAME"
