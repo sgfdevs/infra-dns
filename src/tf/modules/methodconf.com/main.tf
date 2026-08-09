@@ -26,6 +26,13 @@ locals {
       proxied = true
       ttl     = 1
     }
+    cms_staging = {
+      name    = "cms-staging"
+      type    = "CNAME"
+      content = "middleout.levizitting.com"
+      proxied = true
+      ttl     = 1
+    }
     links = {
       name    = "links"
       type    = "CNAME"
