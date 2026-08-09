@@ -173,6 +173,13 @@ locals {
       proxied = false
       ttl     = 1
     }
+    media = {
+      name    = "media"
+      type    = "CNAME"
+      content = "www.sgf.dev"
+      proxied = true
+      ttl     = 1
+    }
     media_staging = {
       name    = "media-staging"
       type    = "CNAME"
@@ -327,24 +334,46 @@ resource "cloudflare_ruleset" "cache" {
   kind    = "zone"
   phase   = "http_request_cache_settings"
 
-  rules = [{
-    ref         = "cache_media_staging"
-    description = "Cache staging media for one year at the edge"
-    expression  = "http.host eq \"media-staging.sgf.dev\""
-    action      = "set_cache_settings"
-    enabled     = true
+  rules = [
+    {
+      ref         = "cache_media"
+      description = "Cache production media for one year at the edge"
+      expression  = "http.host eq \"media.sgf.dev\""
+      action      = "set_cache_settings"
+      enabled     = true
 
-    action_parameters = {
-      cache = true
+      action_parameters = {
+        cache = true
 
-      edge_ttl = {
-        mode    = "override_origin"
-        default = 31536000
+        edge_ttl = {
+          mode    = "override_origin"
+          default = 31536000
+        }
+
+        browser_ttl = {
+          mode = "respect_origin"
+        }
       }
+    },
+    {
+      ref         = "cache_media_staging"
+      description = "Cache staging media for one year at the edge"
+      expression  = "http.host eq \"media-staging.sgf.dev\""
+      action      = "set_cache_settings"
+      enabled     = true
 
-      browser_ttl = {
-        mode = "respect_origin"
+      action_parameters = {
+        cache = true
+
+        edge_ttl = {
+          mode    = "override_origin"
+          default = 31536000
+        }
+
+        browser_ttl = {
+          mode = "respect_origin"
+        }
       }
     }
-  }]
+  ]
 }
