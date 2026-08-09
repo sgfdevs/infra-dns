@@ -15,7 +15,7 @@ locals {
     apex = {
       name    = "@"
       type    = "CNAME"
-      content = "middleout.levizitting.com"
+      content = var.x86_public_vps_target
       proxied = true
       ttl     = 1
     }
@@ -295,7 +295,7 @@ locals {
     www = {
       name    = "www"
       type    = "CNAME"
-      content = "sgf.dev"
+      content = var.x86_public_vps_target
       proxied = true
       ttl     = 1
     }
