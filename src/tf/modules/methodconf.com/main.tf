@@ -29,7 +29,7 @@ locals {
     cms_staging = {
       name    = "cms-staging"
       type    = "CNAME"
-      content = "middleout.levizitting.com"
+      content = var.x86_public_vps_target
       proxied = true
       ttl     = 1
     }
@@ -50,7 +50,7 @@ locals {
     staging = {
       name    = "staging"
       type    = "CNAME"
-      content = "middleout.levizitting.com"
+      content = var.x86_public_vps_target
       proxied = true
       ttl     = 1
     }
