@@ -15,7 +15,7 @@ locals {
     apex = {
       name    = "@"
       type    = "CNAME"
-      content = "middleout.levizitting.com"
+      content = var.x86_public_vps_target
       proxied = true
       ttl     = 1
     }
@@ -173,6 +173,13 @@ locals {
       proxied = false
       ttl     = 1
     }
+    media = {
+      name    = "media"
+      type    = "CNAME"
+      content = "www.sgf.dev"
+      proxied = true
+      ttl     = 1
+    }
     media_staging = {
       name    = "media-staging"
       type    = "CNAME"
@@ -319,32 +326,4 @@ resource "cloudflare_dns_record" "core" {
   comment = var.comment
   proxied = each.value.proxied
   ttl     = each.value.ttl
-}
-
-resource "cloudflare_ruleset" "cache" {
-  zone_id = var.zone_id
-  name    = "Zone cache rules"
-  kind    = "zone"
-  phase   = "http_request_cache_settings"
-
-  rules = [{
-    ref         = "cache_media_staging"
-    description = "Cache staging media for one year at the edge"
-    expression  = "http.host eq \"media-staging.sgf.dev\""
-    action      = "set_cache_settings"
-    enabled     = true
-
-    action_parameters = {
-      cache = true
-
-      edge_ttl = {
-        mode    = "override_origin"
-        default = 31536000
-      }
-
-      browser_ttl = {
-        mode = "respect_origin"
-      }
-    }
-  }]
 }
