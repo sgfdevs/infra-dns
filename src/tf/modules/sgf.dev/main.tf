@@ -295,7 +295,7 @@ locals {
     www = {
       name    = "www"
       type    = "CNAME"
-      content = var.x86_public_vps_target
+      content = "sgf.dev"
       proxied = true
       ttl     = 1
     }
