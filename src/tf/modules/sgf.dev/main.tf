@@ -117,6 +117,13 @@ locals {
       proxied = false
       ttl     = 300
     }
+    id = {
+      name    = "id"
+      type    = "CNAME"
+      content = var.x86_public_vps_target
+      proxied = true
+      ttl     = 1
+    }
     jobs_api = {
       name    = "jobs.api"
       type    = "CNAME"
