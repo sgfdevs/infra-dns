@@ -17,3 +17,8 @@ variable "x86_public_vps_target" {
   description = "Shared edge target hostname for public platform CNAMEs"
   type        = string
 }
+
+variable "k3s_tunnel_target" {
+  description = "Cloudflare Tunnel target for public cluster services"
+  type        = string
+}

@@ -22,14 +22,14 @@ locals {
     cms = {
       name    = "cms"
       type    = "CNAME"
-      content = var.x86_public_vps_target
+      content = var.k3s_tunnel_target
       proxied = true
       ttl     = 1
     }
     cms_staging = {
       name    = "cms-staging"
       type    = "CNAME"
-      content = var.x86_public_vps_target
+      content = var.k3s_tunnel_target
       proxied = true
       ttl     = 1
     }
@@ -43,21 +43,21 @@ locals {
     apex = {
       name    = "@"
       type    = "CNAME"
-      content = var.x86_public_vps_target
+      content = var.k3s_tunnel_target
       proxied = true
       ttl     = 1
     }
     staging = {
       name    = "staging"
       type    = "CNAME"
-      content = var.x86_public_vps_target
+      content = var.k3s_tunnel_target
       proxied = true
       ttl     = 1
     }
     www = {
       name    = "www"
       type    = "CNAME"
-      content = var.x86_public_vps_target
+      content = var.k3s_tunnel_target
       proxied = true
       ttl     = 1
     }

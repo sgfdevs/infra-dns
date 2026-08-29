@@ -15,7 +15,7 @@ locals {
     apex = {
       name    = "@"
       type    = "CNAME"
-      content = var.x86_public_vps_target
+      content = var.k3s_tunnel_target
       proxied = true
       ttl     = 1
     }
@@ -120,7 +120,7 @@ locals {
     id = {
       name    = "id"
       type    = "CNAME"
-      content = var.x86_public_vps_target
+      content = var.k3s_tunnel_target
       proxied = true
       ttl     = 1
     }
@@ -274,7 +274,7 @@ locals {
     staging = {
       name    = "staging"
       type    = "CNAME"
-      content = var.x86_public_vps_target
+      content = var.k3s_tunnel_target
       proxied = true
       ttl     = 1
     }
