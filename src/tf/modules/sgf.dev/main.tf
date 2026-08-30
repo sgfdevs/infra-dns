@@ -138,6 +138,13 @@ locals {
       proxied = false
       ttl     = 900
     }
+    k8s_oidc = {
+      name    = "k8s-oidc"
+      type    = "CNAME"
+      content = var.k3s_tunnel_target
+      proxied = true
+      ttl     = 1
+    }
     link = {
       name    = "link"
       type    = "CNAME"
