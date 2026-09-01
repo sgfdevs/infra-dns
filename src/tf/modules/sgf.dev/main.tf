@@ -342,12 +342,6 @@ resource "cloudflare_dns_record" "core" {
   ttl     = each.value.ttl
 }
 
-resource "cloudflare_zone_setting" "grpc" {
-  zone_id    = var.zone_id
-  setting_id = "long_lived_grpc"
-  value      = "on"
-}
-
 resource "cloudflare_zone_setting" "websockets" {
   zone_id    = var.zone_id
   setting_id = "websockets"
