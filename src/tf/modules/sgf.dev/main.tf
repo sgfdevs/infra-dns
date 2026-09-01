@@ -236,6 +236,13 @@ locals {
       proxied = true
       ttl     = 1
     }
+    projects = {
+      name    = "projects"
+      type    = "CNAME"
+      content = var.k3s_tunnel_target
+      proxied = true
+      ttl     = 1
+    }
     plausible = {
       name    = "plausible"
       type    = "CNAME"
