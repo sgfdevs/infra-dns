@@ -10,9 +10,9 @@ locals {
   records = {
     apex = {
       name    = "@"
-      type    = "A"
-      content = "104.207.254.9"
-      proxied = false
+      type    = "CNAME"
+      content = var.k3s_tunnel_target
+      proxied = true
       ttl     = 1
     }
     score = {
@@ -32,8 +32,8 @@ locals {
     www = {
       name    = "www"
       type    = "CNAME"
-      content = "hack4goodsgf.com"
-      proxied = false
+      content = var.k3s_tunnel_target
+      proxied = true
       ttl     = 1
     }
   }
