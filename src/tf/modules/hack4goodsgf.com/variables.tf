@@ -8,6 +8,11 @@ variable "comment" {
   type        = string
 }
 
+variable "k3s_tunnel_target" {
+  description = "Cloudflare Tunnel CNAME target for public cluster traffic"
+  type        = string
+}
+
 variable "x86_public_vps_target" {
   description = "Shared edge target hostname for public platform CNAMEs"
   type        = string

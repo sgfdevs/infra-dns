@@ -26,6 +26,7 @@ module "hack4goodsgf_com" {
   zone_id               = data.cloudflare_zone.hack4goodsgf_com.id
   comment               = local.dns_record_comment
   x86_public_vps_target = local.x86_public_vps_target
+  k3s_tunnel_target     = local.k3s_tunnel_target
 }
 
 module "helpsgf_com" {
