@@ -1,5 +1,5 @@
 locals {
-  x86_public_vps_target = "x86-vps-node-01.levizitting.com"
+  x86_public_vps_target = "public-edge.levizitting.com"
   dns_record_comment    = "managedBy=tf,repo=sgfdevs/infra-dns"
 }
 
