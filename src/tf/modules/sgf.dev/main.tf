@@ -22,14 +22,14 @@ locals {
     argocd = {
       name    = "argocd"
       type    = "CNAME"
-      content = var.x86_public_vps_target
+      content = var.public_edge_target
       proxied = false
       ttl     = 300
     }
     auth = {
       name    = "auth"
       type    = "CNAME"
-      content = var.x86_public_vps_target
+      content = var.public_edge_target
       proxied = false
       ttl     = 300
     }
@@ -71,7 +71,7 @@ locals {
     dex = {
       name    = "dex"
       type    = "CNAME"
-      content = var.x86_public_vps_target
+      content = var.public_edge_target
       proxied = false
       ttl     = 300
     }
@@ -106,14 +106,14 @@ locals {
     grafana = {
       name    = "grafana"
       type    = "CNAME"
-      content = var.x86_public_vps_target
+      content = var.public_edge_target
       proxied = false
       ttl     = 300
     }
     headlamp = {
       name    = "headlamp"
       type    = "CNAME"
-      content = var.x86_public_vps_target
+      content = var.public_edge_target
       proxied = false
       ttl     = 300
     }
@@ -162,7 +162,7 @@ locals {
     longhorn = {
       name    = "longhorn"
       type    = "CNAME"
-      content = var.x86_public_vps_target
+      content = var.public_edge_target
       proxied = false
       ttl     = 300
     }
@@ -260,14 +260,14 @@ locals {
     seaweedfs = {
       name    = "seaweedfs"
       type    = "CNAME"
-      content = var.x86_public_vps_target
+      content = var.public_edge_target
       proxied = false
       ttl     = 300
     }
     secrets = {
       name    = "secrets"
       type    = "CNAME"
-      content = var.x86_public_vps_target
+      content = var.public_edge_target
       proxied = false
       ttl     = 300
     }
@@ -302,7 +302,7 @@ locals {
     traefik = {
       name    = "traefik"
       type    = "CNAME"
-      content = var.x86_public_vps_target
+      content = var.public_edge_target
       proxied = false
       ttl     = 300
     }
@@ -316,7 +316,7 @@ locals {
     workflows = {
       name    = "workflows"
       type    = "CNAME"
-      content = var.x86_public_vps_target
+      content = var.public_edge_target
       proxied = false
       ttl     = 300
     }

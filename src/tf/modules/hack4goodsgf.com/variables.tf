@@ -13,7 +13,7 @@ variable "k3s_tunnel_target" {
   type        = string
 }
 
-variable "x86_public_vps_target" {
+variable "public_edge_target" {
   description = "Shared edge target hostname for public platform CNAMEs"
   type        = string
 }

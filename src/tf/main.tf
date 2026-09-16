@@ -1,16 +1,16 @@
 locals {
-  x86_public_vps_target = "x86-vps-node-01.levizitting.com"
-  dns_record_comment    = "managedBy=tf,repo=sgfdevs/infra-dns"
+  public_edge_target = "public-edge.levizitting.com"
+  dns_record_comment = "managedBy=tf,repo=sgfdevs/infra-dns"
 }
 
 module "sgf_dev" {
   source = "./modules/sgf.dev"
 
-  zone_id               = data.cloudflare_zone.sgf_dev.id
-  comment               = local.dns_record_comment
-  aws_region            = var.aws_region
-  x86_public_vps_target = local.x86_public_vps_target
-  k3s_tunnel_target     = local.k3s_tunnel_target
+  zone_id            = data.cloudflare_zone.sgf_dev.id
+  comment            = local.dns_record_comment
+  aws_region         = var.aws_region
+  public_edge_target = local.public_edge_target
+  k3s_tunnel_target  = local.k3s_tunnel_target
 }
 
 module "devfestsgf_com" {
@@ -23,10 +23,10 @@ module "devfestsgf_com" {
 module "hack4goodsgf_com" {
   source = "./modules/hack4goodsgf.com"
 
-  zone_id               = data.cloudflare_zone.hack4goodsgf_com.id
-  comment               = local.dns_record_comment
-  x86_public_vps_target = local.x86_public_vps_target
-  k3s_tunnel_target     = local.k3s_tunnel_target
+  zone_id            = data.cloudflare_zone.hack4goodsgf_com.id
+  comment            = local.dns_record_comment
+  public_edge_target = local.public_edge_target
+  k3s_tunnel_target  = local.k3s_tunnel_target
 }
 
 module "helpsgf_com" {
@@ -39,11 +39,11 @@ module "helpsgf_com" {
 module "methodconf_com" {
   source = "./modules/methodconf.com"
 
-  zone_id               = data.cloudflare_zone.methodconf_com.id
-  comment               = local.dns_record_comment
-  aws_region            = var.aws_region
-  x86_public_vps_target = local.x86_public_vps_target
-  k3s_tunnel_target     = local.k3s_tunnel_target
+  zone_id            = data.cloudflare_zone.methodconf_com.id
+  comment            = local.dns_record_comment
+  aws_region         = var.aws_region
+  public_edge_target = local.public_edge_target
+  k3s_tunnel_target  = local.k3s_tunnel_target
 }
 
 module "sgfwebdevs_com" {
