@@ -25,7 +25,7 @@ locals {
     staging = {
       name    = "staging"
       type    = "CNAME"
-      content = var.x86_public_vps_target
+      content = var.public_edge_target
       proxied = false
       ttl     = 300
     }
