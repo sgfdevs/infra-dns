@@ -68,6 +68,13 @@ locals {
       proxied = true
       ttl     = 1
     }
+    crm_preview = {
+      name    = "crm-preview"
+      type    = "CNAME"
+      content = var.public_edge_target
+      proxied = false
+      ttl     = 300
+    }
     dex = {
       name    = "dex"
       type    = "CNAME"
