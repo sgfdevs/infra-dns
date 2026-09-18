@@ -64,13 +64,6 @@ locals {
     crm = {
       name    = "crm"
       type    = "CNAME"
-      content = "middleout.levizitting.com"
-      proxied = true
-      ttl     = 1
-    }
-    crm_preview = {
-      name    = "crm-preview"
-      type    = "CNAME"
       content = var.k3s_tunnel_target
       proxied = true
       ttl     = 1
