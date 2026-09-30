@@ -204,7 +204,7 @@ locals {
     newsletter = {
       name    = "newsletter"
       type    = "CNAME"
-      content = "middleout.levizitting.com"
+      content = var.k3s_tunnel_target
       proxied = true
       ttl     = 1
     }
