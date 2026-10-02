@@ -103,6 +103,13 @@ locals {
       proxied = false
       ttl     = 1
     }
+    glitchtip = {
+      name    = "glitchtip"
+      type    = "CNAME"
+      content = var.k3s_tunnel_target
+      proxied = true
+      ttl     = 1
+    }
     grafana = {
       name    = "grafana"
       type    = "CNAME"
