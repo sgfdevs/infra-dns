@@ -106,9 +106,9 @@ locals {
     glitchtip = {
       name    = "glitchtip"
       type    = "CNAME"
-      content = var.public_edge_target
-      proxied = false
-      ttl     = 300
+      content = var.k3s_tunnel_target
+      proxied = true
+      ttl     = 1
     }
     grafana = {
       name    = "grafana"
