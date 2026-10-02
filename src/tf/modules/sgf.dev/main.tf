@@ -50,7 +50,7 @@ locals {
     cloud = {
       name    = "cloud"
       type    = "CNAME"
-      content = "middleout.levizitting.com"
+      content = var.k3s_tunnel_target
       proxied = true
       ttl     = 1
     }
@@ -218,7 +218,7 @@ locals {
     office = {
       name    = "office"
       type    = "CNAME"
-      content = "middleout.levizitting.com"
+      content = var.k3s_tunnel_target
       proxied = true
       ttl     = 1
     }
