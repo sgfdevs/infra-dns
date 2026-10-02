@@ -50,9 +50,9 @@ locals {
     cloud = {
       name    = "cloud"
       type    = "CNAME"
-      content = "middleout.levizitting.com"
-      proxied = true
-      ttl     = 1
+      content = var.public_edge_target
+      proxied = false
+      ttl     = 300
     }
     covidsupport = {
       name    = "covidsupport"
@@ -211,9 +211,9 @@ locals {
     office = {
       name    = "office"
       type    = "CNAME"
-      content = "middleout.levizitting.com"
-      proxied = true
-      ttl     = 1
+      content = var.public_edge_target
+      proxied = false
+      ttl     = 300
     }
     outline = {
       name    = "outline"
