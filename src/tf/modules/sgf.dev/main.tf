@@ -103,6 +103,13 @@ locals {
       proxied = false
       ttl     = 1
     }
+    glitchtip = {
+      name    = "glitchtip"
+      type    = "CNAME"
+      content = var.public_edge_target
+      proxied = false
+      ttl     = 300
+    }
     grafana = {
       name    = "grafana"
       type    = "CNAME"
