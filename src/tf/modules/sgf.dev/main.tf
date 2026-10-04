@@ -288,7 +288,7 @@ locals {
     social = {
       name    = "social"
       type    = "CNAME"
-      content = "middleout.levizitting.com"
+      content = var.public_edge_target
       proxied = true
       ttl     = 1
     }
