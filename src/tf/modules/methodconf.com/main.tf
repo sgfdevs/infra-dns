@@ -33,6 +33,20 @@ locals {
       proxied = true
       ttl     = 1
     }
+    media = {
+      name    = "media"
+      type    = "CNAME"
+      content = var.k3s_tunnel_target
+      proxied = true
+      ttl     = 1
+    }
+    media_staging = {
+      name    = "media-staging"
+      type    = "CNAME"
+      content = var.k3s_tunnel_target
+      proxied = true
+      ttl     = 1
+    }
     links = {
       name    = "links"
       type    = "CNAME"
